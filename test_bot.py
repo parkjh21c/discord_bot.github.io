@@ -77,12 +77,13 @@ async def 사다리(ctx):
             time_sec = sec_10 - k
             time.sleep(1)
             await time_msg.edit(content=f"{time_sec}초")
-        await time_msg.edit(content="시간 완료")
+        await time_msg.edit(content="집계 완료")
         # 중복 확인용 요소 삭제
         member_entry.remove("0")
 
-        try:
-            total_member = len(member_entry)
+        total_member = len(member_entry)
+
+        if total_member > 1:
             # a팀 뽑기
             for _ in range(total_member // 2):
                 a_member = random.choice(member_entry)
@@ -93,19 +94,19 @@ async def 사다리(ctx):
                 member_entry.remove(i)
                 b_team.append(i)
 
-        except:
-            await ctx.send("에러!")
-        
-        # 결과
-        a_text = ""
-        for j in a_team:
-            a_text = a_text + j + ", "
-        await ctx.send("A팀 : " + a_text)
+            # 결과
+            a_text = ""
+            for j in a_team:
+                a_text = a_text + j + ", "
+            await ctx.send("A팀 : " + a_text)
 
-        b_text = ""
-        for j in b_team:
-            b_text = b_text + j + ", "
-        await ctx.send("B팀 : " + b_text)
+            b_text = ""
+            for j in b_team:
+                b_text = b_text + j + ", "
+            await ctx.send("B팀 : " + b_text)
+            
+        else:
+            await ctx.send("인원수가 부족합니다.")
         
 
 
