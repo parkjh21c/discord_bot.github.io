@@ -60,7 +60,7 @@ async def 주사위(ctx, *, num):
 @bot.command()
 async def 사다리(ctx):
     # 중복 작동 체크
-    if len(member_entry) != 0:
+    if member_entry: # member_entry 리스트가 비었는지 확인
         await ctx.send("이미 작동중입니다!")
     else:
         member_entry.append("0")
